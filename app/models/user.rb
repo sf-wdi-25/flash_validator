@@ -1,22 +1,28 @@
 class User < ActiveRecord::Base
   has_secure_password
 
+  before_save { self.email = email.downcase }
+
+  validates :first_name,
+            presence:   true,
+            length:   { maximum: 255 }
+  validates :last_name,
+            presence:   true,
+            length:   { maximum: 255 }
+  VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
+  validates :email,
+            presence:   true,
+            format:     { with: VALID_EMAIL_REGEX },
+            uniqueness: { case_sensitive: false },
+            length:     { maximum: 255 }
+  VALID_PASSWORD_REGEX = /[a-zA-Z0-9]+/
+  validates :password,
+            presence:   true,
+            length:     { minimum: 8 }
+
   def self.confirm(params)
     @user = User.find_by({email: params[:email]})
     @user.try(:authenticate, params[:password])
   end
-
-  # Validations
-  # TODO: Enter validations for:
-  # 1. first name is present
-  # 2. last name is present
-  # 3. email is present
-  # 4. all three must not be over 255 characters
-  # 5. email must be unique
-  # 6. email must have an @ symbol
-  # 7. password must be at least 8 characters
-  # 8. password can only be letters and numbers
-
-
 
 end
