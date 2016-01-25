@@ -7,21 +7,16 @@ class User < ActiveRecord::Base
   end
 
   # Validations
-  validates :first_name, :last_name, :email, :password_digest,
-  presence: true,
-  length: { maximum: 255,
-    message: "has exceeded maximum length of 255 characters"}
+  # TODO: Enter validations for:
+  # 1. first name is present
+  # 2. last name is present
+  # 3. email is present
+  # 4. all three must not be over 255 characters
+  # 5. email must be unique
+  # 6. email must have an @ symbol
+  # 7. password must be at least 8 characters
+  # 8. password can only be letters and numbers
 
-  validates_uniqueness_of :email
-
-  validates :email, format: { with: /@/,
-    message: "must be a valid"}
-
-  validates_length_of :password, minimum: 8
-
-  validates :password,
-    format: { with: /\A[a-zA-Z1-9]+\z/,
-      message: "only allows letters and numbers" }
 
 
 end
