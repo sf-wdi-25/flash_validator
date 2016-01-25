@@ -24,17 +24,20 @@
       </div>
       <% end %>
   <br>
+
   <% flash.each do |name, msg| %>
   <div id="flash_messages">
     <div class="alert alert-info" role="alert">
       <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
       <span class="sr-only"><%= name %>:</span>
+
       <%= msg %>
 
     </div>
   </div>
   <% end %>
 </div>
+
 <div class="content">
 <%= yield %>
 </div>
